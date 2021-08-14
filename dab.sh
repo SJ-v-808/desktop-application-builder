@@ -60,5 +60,4 @@ else
     echo Name=$Application_name >> $Application_name.desktop
     echo Icon=$Application_icon >> $Application_name.desktop
 
-    code $Application_name.desktop
 fi
