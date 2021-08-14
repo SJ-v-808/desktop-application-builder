@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 Application_path=$1
 Application_name=$2
