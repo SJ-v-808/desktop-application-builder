@@ -11,6 +11,8 @@ then
     echo ""
     echo "[usage]"
     echo ""
+    echo "|For Developers ~> (to install or remove custom or self-made apps in the system)|"
+    echo ""
     echo "#For making .desktop file for the application#"
     echo "> ./dab.sh <Application_path> <Application_name> <Application_icon>"
     echo ""
@@ -18,6 +20,14 @@ then
     echo "> ./dab.sh pb <Application_name>"
     echo ""
     echo "#For removing app in your system"
+    echo "> ./dab.sh rm <Application_name>"
+    echo ""
+    echo "|For users ~> (to install or remove pre-packaged apps in the system)|"
+    echo ""
+    echo "#For installing packaged app in the system#"
+    echo "> ./dab.sh i (note: go to the folder where the app u want to install reside and then execute this command)"
+    echo ""
+    echo "#For removing app in your system#"
     echo "> ./dab.sh rm <Application_name>"
     echo ""
     echo "#For help#"
@@ -33,6 +43,11 @@ then
 elif [ $Application_path == "rm" ]
 then
     sudo rm /usr/share/applications/$Application_name.desktop
+
+elif [ $Application_path == "i" ]
+then
+    ./installer.sh
+
 else
     touch $Application_name.desktop
 
@@ -45,4 +60,5 @@ else
     echo Name=$Application_name >> $Application_name.desktop
     echo Icon=$Application_icon >> $Application_name.desktop
 
+    code $Application_name.desktop
 fi
