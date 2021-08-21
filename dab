@@ -6,38 +6,29 @@ Application_icon=$3
 
 if [ $Application_path == "--h" ]
 then 
-    echo "[About]"
-    echo -e "> Desktop-App-Builder (DAB) is a cli-tool for publishing or removing linux desktop application in the main-system-applications folder\n"
-    echo -e "[usage]\n"
-    echo -e "|For Developers ~> (to install or remove custom or self-made apps in the system)|\n"
-    echo "#For making .desktop file for the application#"
-    echo -e "> ./dab.sh <Application_path> <Application_name> <Application_icon>\n"
-    echo "#For publishing app in your system"
-    echo -e "> ./dab.sh pb <Application_name>\n"
-    echo "#For removing app in your system"
-    echo -e "> ./dab.sh rm <Application_name>\n"
-    echo -e "|For users ~> (to install or remove pre-packaged apps in the system)|\n"
-    echo "#For installing packaged app in the system#"
-    echo -e "> ./dab.sh i (note: go to the folder where the app u want to install reside and then execute this command)\n"
-    echo "#For removing app in your system#"
-    echo -e "> ./dab.sh rm <Application_name>\n"
-    echo "#For help#"
-    echo -e "> ./dab.sh --h \n"
-    echo "[Author]"
-    echo "> ibang"
-elif [ $Application_path == "pb" ]
+    echo -e "\nUsage:"
+    echo " dab [options] <Appication name>"
+    echo -e " dab <Path> <Application name> <Icons>    creates .desktop files\n"
+
+    echo "Options: "
+    echo " -pb            publish the Application in your System"
+    echo " -rm            remove the Application from your System"
+    echo " -i             install the Application in your System"
+    echo " --h            display this help"
+
+    echo -e "\nDesktop-App-Builder (DAB) is a cli-tool for publishing " 
+    echo "or removing linux desktop application in the main-system-applications folder"
+    echo -e "\nReports bugs to https://github.com/SJ-v-808/desktop-application-builder "
+elif [ $Application_path == "-pb" ]
 then
     sudo mv $Application_name.desktop /usr/share/applications
-
-
-elif [ $Application_path == "rm" ]
+elif [ $Application_path == "-rm" ]
 then
     sudo rm /usr/share/applications/$Application_name.desktop
 
-elif [ $Application_path == "i" ]
+elif [ $Application_path == "-i" ]
 then
     ./installer.sh
-
 else
     touch $Application_name.desktop
 
@@ -49,5 +40,4 @@ else
     echo Exec=$Application_path >> $Application_name.desktop
     echo Name=$Application_name >> $Application_name.desktop
     echo Icon=$Application_icon >> $Application_name.desktop
-
 fi
