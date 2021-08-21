@@ -1,0 +1,44 @@
+#!/bin/bash
+
+#Cli arguments
+Application_path=$1
+Application_name=$2
+Application_icon=$3
+
+if [ $Application_path == "--h" ]
+then 
+    echo -e "\nUsage:"
+    echo " dab [options] <Appication name>"
+    echo -e " dab <Path> <Application name> <Icons>    creates .desktop files\n"
+
+    echo "Options: "
+    echo " -pb            publish the Application in your System"
+    echo " -rm            remove the Application from your System"
+    echo " -i             install the Application in your System"
+    echo " --h            display this help"
+
+    echo -e "\nDesktop-App-Builder (DAB) is a cli-tool for publishing " 
+    echo "or removing linux desktop application in the main-system-applications folder"
+    echo -e "\nReports bugs to https://github.com/SJ-v-808/desktop-application-builder "
+elif [ $Application_path == "-pb" ]
+then
+    sudo mv $Application_name.desktop /usr/share/applications
+elif [ $Application_path == "-rm" ]
+then
+    sudo rm /usr/share/applications/$Application_name.desktop
+
+elif [ $Application_path == "-i" ]
+then
+    ./installer.sh
+else
+    touch $Application_name.desktop
+
+    echo [Desktop Entry] >> $Application_name.desktop
+    echo Encoding=UTF-8 >> $Application_name.desktop
+    echo Version=1.0 >> $Application_name.desktop
+    echo Type=Application >> $Application_name.desktop
+    echo Terminal=false >> $Application_name.desktop
+    echo Exec=$Application_path >> $Application_name.desktop
+    echo Name=$Application_name >> $Application_name.desktop
+    echo Icon=$Application_icon >> $Application_name.desktop
+fi
