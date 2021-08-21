@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#Cli arguments
 Application_path=$1
 Application_name=$2
 Application_icon=$3
